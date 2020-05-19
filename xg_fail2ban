@@ -1,0 +1,76 @@
+#!/bin/bash
+
+source /etc/xg_fail2ban.conf
+
+# curl -v -k $XG_URL/webconsole/APIController -F "reqxml=<addOfFirewallDef.xml"
+
+function ban {
+echo "ban"
+
+echo $API_USER
+echo $API_ENCR_PASS
+echo $HOSTNAME
+echo $IP
+
+echo "Add host def:"
+sed -e "s/API_USER_TEMPL/$API_USER/" \
+    -e "s/API_ENCR_PASS_TEMPL/$API_ENCR_PASS/" \
+    -e "s/HOSTNAME_TEMPL/$HOSTNAME/" \
+    -e "s/IP_TEMPL/$IP/" \
+    "$XG_FAIL2BAN_LOCATION/addOfHostDef.templ" > /tmp/xg_fail2ban-$IP.xml
+
+echo "Add firewall def:"
+sed -e "s/API_USER_TEMPL/$API_USER/" \
+    -e "s/API_ENCR_PASS_TEMPL/$API_ENCR_PASS/" \
+    -e "s/HOSTNAME_TEMPL/$HOSTNAME/" \
+    -e "s/IP_TEMPL/$IP/" \
+    "$XG_FAIL2BAN_LOCATION/addOfFirewallDef.templ" >> /tmp/xg_fail2ban-$IP.xml
+}
+
+function unban {
+echo "unban"
+
+echo $API_USER
+echo $API_ENCR_PASS
+echo $HOSTNAME
+echo $IP
+
+echo "Delete firewall def:"
+sed -e "s/API_USER_TEMPL/$API_USER/" \
+    -e "s/API_ENCR_PASS_TEMPL/$API_ENCR_PASS/" \
+    -e "s/HOSTNAME_TEMPL/$HOSTNAME/" \
+    -e "s/IP_TEMPL/$IP/" \
+    "$XG_FAIL2BAN_LOCATION/deleteOfFirewallDef.templ" > /tmp/xg_fail2ban-$IP.xml
+
+echo "Delete host def:"
+sed -e "s/API_USER_TEMPL/$API_USER/" \
+    -e "s/API_ENCR_PASS_TEMPL/$API_ENCR_PASS/" \
+    -e "s/HOSTNAME_TEMPL/$HOSTNAME/" \
+    -e "s/IP_TEMPL/$IP/" \
+    "$XG_FAIL2BAN_LOCATION/deleteOfHostDef.templ" >> /tmp/xg_fail2ban-$IP.xml
+}
+
+function help {
+    echo ""
+    echo "Configure the file /etc/xg_fail2ban.conf,"
+    echo "And use like:"
+    echo "xg_fail2ban ban 1.2.3.4"
+    echo " or"
+    echo "xg_fail2ban unban 1.2.3.4"
+    echo ""
+    exit 1
+}
+
+IP=$2
+
+case $1 in "") help; esac
+
+case $1 in "ban") ban; esac
+
+case $1 in "unban") unban; esac
+
+case $2 in "") help; esac
+
+echo "and finally upload th generated xml, if the script made t all the way here"
+
+# curl -v -k $XG_URL/webconsole/APIController -F "reqxml=</tmp/xg_fail2ban-$IP.xml"

@@ -1,0 +1,41 @@
+<Request>
+    <Login>
+	<Username>API_USER_TEMPL</Username>
+	<Password passwordform="encrypt">API_ENCR_PASS_TEMPL</Password>
+    </Login>
+    <Remove>
+	<SecurityPolicy>
+	    <Name>HOSTNAME_TEMPL-IP_TEMPL</Name>
+	    <Status>Disable</Status>
+	    <IPFamily>IPv4</IPFamily>
+	    <Position>after</Position>
+	    <After>
+		<Name>block from IPs</Name>
+	    </After>
+	    <PolicyType>Network</PolicyType>
+	    <NetworkPolicy>
+	    	    <SourceZones>
+			<Zone>Any</Zone>
+    		    </SourceZones>
+		    <SourceNetworks>
+		        <Network>HOSTNAME_TEMPL-IP_TEMPL</Network>
+		    </SourceNetworks>
+		    <Services>
+		        <Service>Any</Service>
+		    </Services>
+		    <Schedule>All The Time</Schedule>
+		    <DestinationZones>
+		        <Zone>Any</Zone>
+		    </DestinationZones>
+		    <DestinationNetworks>
+		        <Network>Any</Network>
+		    </DestinationNetworks>
+		    <Services>
+		        <Service>Any</Service>
+		    </Services>
+		    <Action>Drop</Action>
+		    <MatchIdentity>Disable</MatchIdentity>			
+		    <LogTraffic>Enable</LogTraffic>
+	    </NetworkPolicy>
+	</SecurityPolicy>
+    </Remove>
