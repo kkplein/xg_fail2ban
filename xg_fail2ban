@@ -2,8 +2,6 @@
 
 source /etc/xg_fail2ban.conf
 
-# curl -v -k $XG_URL/webconsole/APIController -F "reqxml=<addOfFirewallDef.xml"
-
 function ban {
 echo "ban"
 
@@ -71,6 +69,7 @@ case $1 in "unban") unban; esac
 
 case $2 in "") help; esac
 
-echo "and finally upload th generated xml, if the script made t all the way here"
+echo "to finally upload the generated xml, if the script made t all the way here"
+echo "the last line needs to be uncommented"
 
 # curl -v -k $XG_URL/webconsole/APIController -F "reqxml=</tmp/xg_fail2ban-$IP.xml"
