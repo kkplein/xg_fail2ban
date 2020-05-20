@@ -1,10 +1,10 @@
-These proof-of-concept scripts will allow for XG in WAF, where the internal WAF-ed host will block IPs using fail2ban,
-and will configure the actual block on the XG, using the API.
+These scripts will allow for XG in WAF, where the internal WAF-ed host ("webserver") can block IPs using fail2ban,
+and configure the actual block to be on the XG, using the API.
 
 Fail2ban and such will no longer work with WAF, as all traffic comes from XG, and not from the original host.
 Be sure to pass the the X-Forwarded-For to the internal server.
 
-
+Instructions, on the to-be protected internal server:
 * create a directory /opt/xg_fail2ban
 * copy all files to it, except:
 * copy xg_fail2ban.conf to /etc, and complete according to your setup
