@@ -14,12 +14,12 @@ Suppose the internal server has hostname "webserver":
 Then, run like:
 root@webserver:/opt/xg_fail2ban# ./xg_fail2ban ban 1.2.3.4
 
-this will generate an XML file in /tmp, that can be uploaded via the API that will
+this will generate an XML file in /tmp (and optionally also upload it to XG) that will
 - first create a object def with name "fail2ban-webserver-1.2.3.4"
 - second create a firewall rule to drop traffic coming from it 
 
 root@webserver:/opt/xg_fail2ban# ./xg_fail2ban unban 1.2.3.4
-this will generate an XML file in /tmp, that you can upload via the API that will
+this will generate an XML file in /tmp, (and optionally also upload it to XG) that will
 - first delete the firewall rule to drop traffic coming from object fail2ban-webserver-1.2.3.4 
 - second delete the object def with name "hostname-1.2.3.4"
 
