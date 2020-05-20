@@ -3,13 +3,8 @@
 	<Username>API_USER_TEMPL</Username>
 	<Password passwordform="encrypt">API_ENCR_PASS_TEMPL</Password>
     </Login>
-    <Set Operation="add">
-	<IPHost>
-	    <Name>fail2ban-HOSTNAME_TEMPL-IP_TEMPL</Name>
-	    <IPFamily>IPv4</IPFamily>
-	    <HostType>IP</HostType>
-	    <IPAddress>IP_TEMPL</IPAddress>
-	    <Subnet>255.255.255.0</Subnet>
-	    <HostGroupList></HostGroupList>
-	</IPHost>
-    </Set>
+    <Remove>
+	<SecurityPolicy>
+		<Name>fail2ban-HOSTNAME_TEMPL-IP_TEMPL</Name>
+	</SecurityPolicy>
+    </Remove>
