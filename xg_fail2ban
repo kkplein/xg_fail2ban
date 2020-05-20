@@ -15,14 +15,14 @@ sed -e "s/API_USER_TEMPL/$API_USER/" \
     -e "s/API_ENCR_PASS_TEMPL/$API_ENCR_PASS/" \
     -e "s/HOSTNAME_TEMPL/$HOSTNAME/" \
     -e "s/IP_TEMPL/$IP/" \
-    "$XG_FAIL2BAN_LOCATION/addOfHostDef.templ" > /tmp/xg_fail2ban-$IP.xml
+    "$XG_FAIL2BAN_LOCATION/addOfHostDef.templ" > /tmp/xg_fail2ban-$IP-$$.xml
 
 echo "Add firewall def:"
 sed -e "s/API_USER_TEMPL/$API_USER/" \
     -e "s/API_ENCR_PASS_TEMPL/$API_ENCR_PASS/" \
     -e "s/HOSTNAME_TEMPL/$HOSTNAME/" \
     -e "s/IP_TEMPL/$IP/" \
-    "$XG_FAIL2BAN_LOCATION/addOfFirewallDef.templ" >> /tmp/xg_fail2ban-$IP.xml
+    "$XG_FAIL2BAN_LOCATION/addOfFirewallDef.templ" >> /tmp/xg_fail2ban-$IP-$$.xml
 }
 
 function unban {
@@ -38,14 +38,14 @@ sed -e "s/API_USER_TEMPL/$API_USER/" \
     -e "s/API_ENCR_PASS_TEMPL/$API_ENCR_PASS/" \
     -e "s/HOSTNAME_TEMPL/$HOSTNAME/" \
     -e "s/IP_TEMPL/$IP/" \
-    "$XG_FAIL2BAN_LOCATION/deleteOfFirewallDef.templ" > /tmp/xg_fail2ban-$IP.xml
+    "$XG_FAIL2BAN_LOCATION/deleteOfFirewallDef.templ" > /tmp/xg_fail2ban-$IP-$$.xml
 
 echo "Delete host def:"
 sed -e "s/API_USER_TEMPL/$API_USER/" \
     -e "s/API_ENCR_PASS_TEMPL/$API_ENCR_PASS/" \
     -e "s/HOSTNAME_TEMPL/$HOSTNAME/" \
     -e "s/IP_TEMPL/$IP/" \
-    "$XG_FAIL2BAN_LOCATION/deleteOfHostDef.templ" >> /tmp/xg_fail2ban-$IP.xml
+    "$XG_FAIL2BAN_LOCATION/deleteOfHostDef.templ" >> /tmp/xg_fail2ban-$IP-$$.xml
 }
 
 function help {
@@ -69,7 +69,7 @@ case $1 in "unban") unban; esac
 
 case $2 in "") help; esac
 
-echo "to finally upload the generated xml, if the script made t all the way here"
-echo "the last line needs to be uncommented"
-
-# curl -v -k $XG_URL/webconsole/APIController -F "reqxml=</tmp/xg_fail2ban-$IP.xml"
+echo "and finally upload the generated xml, if the script made t all the way here"
+echo "the name of the generated file: /tmp/xg_fail2ban-$IP-$$.xml"
+# uncomment the below line to *actually* apply the XML to the XG over the API
+# curl -v -k $XG_URL/webconsole/APIController -F "reqxml=</tmp/xg_fail2ban-$IP-$$.xml"
