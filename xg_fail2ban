@@ -1,12 +1,7 @@
 #!/bin/bash
 
 function ban {
-echo "ban"
-
-echo $API_USER
-echo $API_ENCR_PASS
-echo $HOSTNAME
-echo $IP
+logger "xg_fail2ban ban $IP"
 
 echo "Add host def:"
 sed -e "s/API_USER_TEMPL/$API_USER/" \
@@ -26,12 +21,7 @@ sed -e "s/API_USER_TEMPL/$API_USER/" \
 }
 
 function unban {
-echo "unban"
-
-echo $API_USER
-echo $API_ENCR_PASS
-echo $HOSTNAME
-echo $IP
+logger "xg_fail2ban unban $IP"
 
 echo "Delete firewall def:"
 sed -e "s/API_USER_TEMPL/$API_USER/" \
@@ -78,4 +68,8 @@ case $2 in "") help; esac
 echo "and finally upload the generated xml, if the script made t all the way here"
 echo "the name of the generated file: /tmp/xg_fail2ban-$IP-$$.xml"
 # uncomment the below line to *actually* apply the XML to the XG over the API
-# curl -v -k $XG_URL/webconsole/APIController -F "reqxml=</tmp/xg_fail2ban-$IP-$$.xml"
+
+CURL_RETURN=$(curl -k $XG_URL/webconsole/APIController -F "reqxml=</tmp/xg_fail2ban-$IP-$$.xml")
+
+echo $CURL_RETURN
+logger $CURL_RETURN $IP
