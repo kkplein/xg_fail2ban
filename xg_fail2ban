@@ -72,4 +72,4 @@ echo "the name of the generated file: /tmp/xg_fail2ban-$IP-$$.xml"
 CURL_RETURN=$(curl -k $XG_URL/webconsole/APIController -F "reqxml=</tmp/xg_fail2ban-$IP-$$.xml")
 
 echo $CURL_RETURN
-logger $CURL_RETURN $IP
+logger "xg_fail2ban $CURL_RETURN $IP"
