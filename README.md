@@ -33,7 +33,7 @@ this will generate an XML file in /tmp, (and optionally also upload it to XG) th
 - first delete the firewall rule to drop traffic coming from object f2b-webserver-1.2.3.4 
 - second delete the object def with name "hostname-1.2.3.4"
 
-Notesbbb.b
+NOTES
 
 - hostname is taken from /etc/hostname, and is only used to easily identify in XG where the ban came from
 
