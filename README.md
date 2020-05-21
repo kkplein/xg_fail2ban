@@ -1,4 +1,4 @@
-SOPHOS XG <-> FAIL2BAN
+# SOPHOS XG <-> FAIL2BAN
 
 This scripts allows sophos XG with WAF proxied internal servers, to process fail2ban ban/unban requests from the internal servers.
 
@@ -13,7 +13,7 @@ All regular fail2ban configs normally apply, like whitelists etc.
 
 Be sure to pass the the X-Forwarded-For to the internal server.
 
-Instructions:
+## INSTRUCTIONS
 * create a directory /opt/xg_fail2ban
 * download and extract master.zip
 * copy all zipped files to /opt/xg_fain2ban, except:
@@ -33,7 +33,7 @@ this will generate an XML file in /tmp, (and optionally also upload it to XG) th
 - first delete the firewall rule to drop traffic coming from object f2b-webserver-1.2.3.4 
 - second delete the object def with name "hostname-1.2.3.4"
 
-NOTES
+## NOTES
 
 - hostname is taken from /etc/hostname, and is only used to easily identify in XG where the ban came from
 
@@ -50,7 +50,7 @@ For production you will need "Enable" rules with action "Drop". Configure this i
 - I notice frequently that XG displays new rules with Any (zone) / Any (network) with is wrong, and frightening.
 After a minute this usually changes automatically to the created network object. No idea why.
 
-Troubleshoot:
+## TROUBLESHOOT
 - make sure to enable XG for API access from the internal server IP
 - manually try to upload the XML to XG, to see return codes
 - check that the last line is uncommented if nothing happens
