@@ -1,20 +1,20 @@
   <Set Operation="add">
     <SecurityPolicy transactionid="">
-      <Name>fail2ban-HOSTNAME_TEMPL-IP_TEMPL</Name>
+      <Name>f2b-HOSTNAME_TEMPL-IP_TEMPL</Name>
       <Description/>
       <IPFamily>IPv4</IPFamily>
-      <Status>Disable</Status>
+      <Status>XG_STATUS_TEMPL</Status>
       <Position>After</Position>
       <PolicyType>Network</PolicyType>
       <After>
         <Name>block from IPs</Name>
       </After>
       <Schedule>All The Time</Schedule>
-      <Action>Accept</Action>
+      <Action>XG_ACTION_TEMPL</Action>
       <LogTraffic>Disable</LogTraffic>
       <MatchIdentity>Disable</MatchIdentity>
       <SourceNetworks>
-        <Network>fail2ban-HOSTNAME_TEMPL-IP_TEMPL</Network>
+        <Network>f2b-HOSTNAME_TEMPL-IP_TEMPL</Network>
       </SourceNetworks>
       <DSCPMarking>-1</DSCPMarking>
       <ApplicationControl>None</ApplicationControl>

@@ -22,6 +22,8 @@ sed -e "s/API_USER_TEMPL/$API_USER/" \
     -e "s/API_ENCR_PASS_TEMPL/$API_ENCR_PASS/" \
     -e "s/HOSTNAME_TEMPL/$HOSTNAME/" \
     -e "s/IP_TEMPL/$IP/" \
+    -e "s/XG_ACTION_TEMPL/$XG_ACTION/" \
+    -e "s/XG_STATUS_TEMPL/$XG_STATUS/" \
     "$XG_FAIL2BAN_LOCATION/addOfFirewallDef.templ" >> /tmp/xg_fail2ban-$IP-$$.xml
 }
 
@@ -72,4 +74,4 @@ case $2 in "") help; esac
 echo "and finally upload the generated xml, if the script made t all the way here"
 echo "the name of the generated file: /tmp/xg_fail2ban-$IP-$$.xml"
 # uncomment the below line to *actually* apply the XML to the XG over the API
-# curl -v -k $XG_URL/webconsole/APIController -F "reqxml=</tmp/xg_fail2ban-$IP-$$.xml"
+curl -v -k $XG_URL/webconsole/APIController -F "reqxml=</tmp/xg_fail2ban-$IP-$$.xml"
