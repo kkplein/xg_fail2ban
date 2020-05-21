@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source /etc/xg_fail2ban.conf
-
 function ban {
 echo "ban"
 
@@ -61,6 +59,12 @@ function help {
     exit 1
 }
 
+if [ -f "/etc/xg_fail2ban.conf" ]; then
+    source /etc/xg_fail2ban.conf
+else 
+    help
+fi
+
 IP=$2
 
 case $1 in "") help; esac
@@ -74,4 +78,4 @@ case $2 in "") help; esac
 echo "and finally upload the generated xml, if the script made t all the way here"
 echo "the name of the generated file: /tmp/xg_fail2ban-$IP-$$.xml"
 # uncomment the below line to *actually* apply the XML to the XG over the API
-curl -v -k $XG_URL/webconsole/APIController -F "reqxml=</tmp/xg_fail2ban-$IP-$$.xml"
+# curl -v -k $XG_URL/webconsole/APIController -F "reqxml=</tmp/xg_fail2ban-$IP-$$.xml"
